@@ -28,7 +28,7 @@ Siga os passos abaixo para executar o Alpha Centauri na sua máquina.
 
 ### 1. Clonar o Repositório
 ```bash
-git clone [URL_DO_SEU_REPOSITORIO]
+git clone https://github.com/cauasantoslt/AlphaCentauri
 cd AlphaCentauri
 ```
 
