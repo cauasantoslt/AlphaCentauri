@@ -1,29 +1,43 @@
-# 🚀 Alpha Centauri - Assistente de Voz com IA Generativa
+# 🚀 Alpha Centauri - Assistente Pessoal com IA Generativa
 
-Bem-vindo ao Alpha Centauri! Este é um protótipo de assistente de voz para desktop, construído em Python, capaz de executar comandos, aprender novas habilidades em tempo real e manter conversas, tudo com uma voz natural e de alta qualidade.
+![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-## ✨ Funcionalidades
+Bem-vindo ao Alpha Centauri! Este é um assistente de voz avançado para desktop, construído em Python. Ele vai além de simples comandos, utilizando um cérebro de IA generativa (Google Gemini) para aprender novas habilidades em tempo real, integrar-se com serviços essenciais do seu dia a dia e manter conversas naturais.
 
-* **Reconhecimento de Voz Contínuo:** Utiliza a API Speech-to-Text do Google para transcrição precisa.
-* **Voz Natural:** Responde com uma voz de alta qualidade da API Google Cloud Text-to-Speech.
-* **Arquitetura Modular:** Comandos são organizados em módulos, facilitando a expansão.
-* **IA Generativa (Google Gemini):** Pode gerar e executar código Python para novas tarefas sob demanda.
-* **Mecanismo de Aprendizado:** Salva os comandos gerados pela IA em um arquivo `learned_commands.json` para uso futuro.
-* **Modo Conversa:** Mantém um diálogo aberto sobre qualquer assunto.
-* **Integração com Google Agenda:** Capaz de ler e criar eventos na agenda do usuário.
-* **Gerenciamento Seguro de Segredos:** Utiliza arquivos `.env` para proteger as chaves de API.
+Este projeto foi construído de forma colaborativa e documenta a jornada desde um simples script até uma plataforma de assistente robusta e modular.
+
+## ✨ Funcionalidades Principais
+
+O Alpha Centauri foi projetado para ser poderoso e extensível. As suas capacidades atuais incluem:
+
+#### **Núcleo do Assistente:**
+* **Reconhecimento de Voz Contínuo:** Utiliza a API `Speech-to-Text` do Google para uma transcrição precisa e contínua dos comandos.
+* **Síntese de Voz Natural:** Responde com uma voz WaveNet de alta qualidade da API `Text-to-Speech` do Google, processada de forma robusta com `Pygame`.
+* **Arquitetura Modular:** Comandos são organizados em módulos individuais, permitindo que novas funcionalidades sejam adicionadas de forma limpa e rápida.
+* **Gerenciamento Seguro de Segredos:** Todas as chaves de API e credenciais são geridas de forma segura através de um ficheiro `.env`, mantendo o código fonte limpo e partilhável.
+
+#### **Inteligência Artificial & Aprendizado:**
+* **IA Generativa (Google Gemini):** O cérebro por trás das operações complexas. É usado para interpretar a linguagem natural, extrair informações (como detalhes de um evento ou nomes de músicas) e até mesmo gerar código Python.
+* **Capacidade de Aprendizagem:** O assistente pode criar e salvar permanentemente novos comandos. Basta pedir-lhe para "criar um comando para...", e ele usará a IA para escrever o script, que pode ser salvo na sua memória.
+* **Memória Persistente:** Os comandos aprendidos são guardados num ficheiro `learned_commands.json`, tornando o assistente cada vez mais personalizado com o uso.
+* **Modo de Conversa Aberta:** Pode entrar num modo de "bate-papo" para conversar sobre qualquer assunto, alimentado diretamente pelo Gemini.
+* **Inteligência Social (Fallback):** Se um comando não for reconhecido, o assistente usa a IA para determinar se foi um cumprimento ou agradecimento e responde de forma apropriada.
+
+#### **Integrações Atuais:**
+* **Google Agenda:** Lê os seus próximos compromissos e cria novos eventos na sua agenda com base em comandos de voz naturais.
+* **Gmail:** Lê um resumo dos seus e-mails mais recentes não lidos.
+* **Spotify:** Controla a reprodução de músicas e playlists (tocar, pausar, pular) de forma inteligente, usando a IA para identificar a música e o artista que você pediu.
+* **Controlo do Windows:** Executa ações básicas no sistema operativo, como abrir programas.
 
 ## 🛠️ Tecnologias Utilizadas
-
-* **Linguagem:** Python 3
-* **Reconhecimento de Voz:** `speech_recognition` + Google Cloud Speech-to-Text
-* **Síntese de Voz:** `pygame` + Google Cloud Text-to-Speech
-* **IA Generativa:** `google-generativeai` (Gemini)
-* **Autenticação Google:** `google-auth-oauthlib`
-* **Automação Windows:** `pyautogui`, `pygetwindow`, `pycaw`
+* **Linguagem:** Python
+* **Voz & IA:** Google Cloud (Speech-to-Text, Text-to-Speech), Google Gemini (`gemini-1.5-flash-latest`)
+* **Integrações:** Google Calendar API, Gmail API, Spotify Web API (`Spotipy`)
+* **Automação e GUI:** `pyautogui`, `pygetwindow`, `pycaw`, `pygame`
+* **Segurança:** `python-dotenv`
 
 ## ⚙️ Configuração do Projeto
-
 Siga os passos abaixo para executar o Alpha Centauri na sua máquina.
 
 ### 1. Clonar o Repositório
