@@ -1,0 +1,10 @@
+# .gitignore
+venv/
+__pycache__/
+*.pyc
+.env
+google_credentials.json
+token.json
+temp_generated_command.py
+temp_response.mp3
+credentials.json

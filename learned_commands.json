@@ -1,0 +1,25 @@
+{
+    "spotify": {
+        "keywords": [
+            "abrir spotify"
+        ],
+        "code": "import os\n\nos.system(\"start spotify\")"
+    },
+    "volume_control": {
+        "keywords": [
+            "down",
+            "mute",
+            "toggle",
+            "unmute",
+            "up"
+        ],
+        "code": "import sys\nfrom ctypes import cast, POINTER\nfrom comtypes import CLSCTX_ALL\nfrom pycaw.pycaw import AudioUtilities, IAudioEndpointVolume\n\ndef get_volume_interface():\n    try:\n        devices = AudioUtilities.GetSpeakers()\n        interface = devices.Activate(\n            IAudioEndpointVolume._iid_, CLSCTX_ALL, None)\n        return cast(interface, POINTER(IAudioEndpointVolume))\n    except Exception as e:\n        print(f\"Erro ao inicializar o controle de áudio: {e}\")\n        sys.exit(1)\n\ndef main():\n    volume = get_volume_interface()\n\n    if len(sys.argv) < 2:\n        current_scalar = volume.GetMasterVolumeLevelScalar()\n        current_percent = round(current_scalar * 100)\n        is_muted = \"Sim\" if volume.GetMute() else \"Não\"\n        print(f\"Volume Atual: {current_percent}% | Mudo: {is_muted}\")\n        print(\"\\nUso: python <script.py> [comando] [valor]\")\n        print(\"Comandos:\")\n        print(\"  set <0-100>    - Define o volume para um valor percentual.\")\n        print(\"  up [passo]     - Aumenta o volume (padrão: 5%).\")\n        print(\"  down [passo]   - Diminui o volume (padrão: 5%).\")\n        print(\"  mute           - Silencia o áudio.\")\n        print(\"  unmute         - Ativa o áudio.\")\n        print(\"  toggle         - Alterna o estado mudo.\")\n        return\n\n    command = sys.argv[1].lower()\n\n    if command == 'set':\n        try:\n            level = int(sys.argv[2])\n            if 0 <= level <= 100:\n                volume.SetMasterVolumeLevelScalar(level / 100.0, None)\n                print(f\"Volume definido para {level}%.\")\n            else:\n                print(\"Erro: O nível do volume deve estar entre 0 e 100.\")\n        except (IndexError, ValueError):\n            print(\"Erro: Forneça um valor numérico (0-100) para o comando 'set'.\")\n\n    elif command in ('up', 'down'):\n        step = 5.0\n        if len(sys.argv) > 2:\n            try:\n                step = float(sys.argv[2])\n            except ValueError:\n                print(f\"Passo inválido. Usando o padrão de {step}%.\")\n        \n        current_scalar = volume.GetMasterVolumeLevelScalar()\n        if command == 'up':\n            new_scalar = min(1.0, current_scalar + step / 100.0)\n        else:\n            new_scalar = max(0.0, current_scalar - step / 100.0)\n        \n        volume.SetMasterVolumeLevelScalar(new_scalar, None)\n        print(f\"Volume ajustado para {round(new_scalar * 100)}%.\")\n\n    elif command == 'mute':\n        volume.SetMute(1, None)\n        print(\"Áudio silenciado.\")\n\n    elif command == 'unmute':\n        volume.SetMute(0, None)\n        print(\"Áudio ativado.\")\n        \n    elif command == 'toggle':\n        is_muted = volume.GetMute()\n        volume.SetMute(not is_muted, None)\n        if not is_muted:\n            print(\"Áudio silenciado (toggle).\")\n        else:\n            print(\"Áudio ativado (toggle).\")\n\n    else:\n        print(f\"Comando desconhecido: '{command}'. Execute sem argumentos para ver a ajuda.\")\n\nif __name__ == \"__main__\":\n    main()"
+    },
+    "close_spotify": {
+        "keywords": [
+            "fechar spotify",
+            "close spotify"
+        ],
+        "code": "import os\nimport psutil\n\nfor proc in psutil.process_iter(['pid', 'name']):\n    if proc.info['name'] == \"Spotify.exe\":\n        proc.kill()"
+    }
+}
