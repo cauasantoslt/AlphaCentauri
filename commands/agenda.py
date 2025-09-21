@@ -12,8 +12,8 @@ from googleapiclient.errors import HttpError
 import google.generativeai as genai
 
 # --- CONFIGURAÇÃO ---
-SCOPES = ["https://www.googleapis.com/auth/calendar"]
-KEYWORDS = ("agenda", "compromisso", "reunião", "evento", "marque", "crie") # Adicionamos "crie" aqui
+SCOPES = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/gmail.readonly"]
+KEYWORDS = ("agenda", "compromisso", "reunião", "evento", "marque", "crie") 
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_API_KEY:
