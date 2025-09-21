@@ -84,4 +84,4 @@ Na primeira vez que usar um comando da agenda, uma janela do navegador se abrir√
 * **Generativos:** "crie um comando para...", "escreva um script para...".
 
 ---
-Desenvolvido por [cauasantoslt / alison.js] - 2025
+Desenvolvido por cauasantoslt / Alisonjs0 - 2025
